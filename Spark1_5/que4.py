@@ -19,6 +19,7 @@ file1=spark.read.csv("/home/pravin/Downloads/startup.csv",inferSchema=True,heade
 file2=spark.read.parquet("/home/pravin/Downloads/consumerInternet.parquet",inferSchema=True,header=True)
 
 file3=file1.unionAll(file2)
+file3.createOrReplaceTempView('df4_table')
 
-spark.sql("SELECT Industry_Vertical, COUNT(Startup_Name) startup_count FROM topfive GROUP BY Industry_Vertical order by startup_count DESC LIMIT 5").show()
+spark.sql("SELECT Industry_Vertical, COUNT(Startup_Name) startup_count FROM df4_table GROUP BY Industry_Vertical order by startup_count DESC LIMIT 5").show()
 
